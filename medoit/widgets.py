@@ -6,8 +6,9 @@ from PyQt5.QtCore import Qt
 
 class ManageTODOs(QWidget):
 
-  def __init__(self):
+  def __init__(self, manager):
     super().__init__()
+    self.manager = manager
     layout = QBoxLayout(QBoxLayout.Direction.TopToBottom)
     self.todos = QListWidget()
     self.new = QPushButton('New')
@@ -20,6 +21,13 @@ class ManageTODOs(QWidget):
     layout.addWidget(self.rename, alignment=Qt.AlignCenter)
     layout.addWidget(self.delete, alignment=Qt.AlignCenter)
     self.setLayout(layout)
+    self.manager.attach(self.update)
+    self.update()
+
+  def update(self):
+    self.todos.clear()
+    print([todo.name for todo in self.manager.todos])
+    self.todos.addItems([todo.name for todo in self.manager.todos])
 
   def setNewCallback(self, callback):
     self.new.clicked.connect(callback)
@@ -50,7 +58,7 @@ class NewTODODialog(QDialog):
     self.setLayout(layout)
 
   def setOKCallback(self, callback):
-    self.ok.clicked.connect(lambda: callback(self.name.text))
+    self.ok.clicked.connect(lambda: callback(self.name.text()))
 
   def setCancelCallback(self, callback):
     self.cancel.clicked.connect(callback)
