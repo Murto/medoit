@@ -28,15 +28,29 @@ class TODO(Observable):
 
 class TODOManager(Observable):
     
-  def __init__(self, todos=set(), observers=set()):
+  def __init__(self, todos=dict(), observers=set()):
     super().__init__(observers)
     self.todos = todos
     self.notify()
 
+  def get(self, name):
+    return self.todos[name]
+
   def add(self, todo):
-    self.todos.add(todo)
+    if todo.name in self.todos:
+      raise ValueError()
+    self.todos[todo.name] = todo
     self.notify()
 
-  def remove(self, todo):
-    self.todos.remove(todo)
+  def remove(self, name):
+    del self.todos[name]
+    self.notify()
+
+  def rename(self, name, newName):
+    if not name in self.todos:
+      raise ValueError()
+    if newName in self.todos:
+      raise ValueError()
+    self.todos[newName] = self.todos[name]
+    del self.todos[name]
     self.notify()
