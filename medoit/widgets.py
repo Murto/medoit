@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from PyQt5.QtWidgets import QBoxLayout, QLabel, QListWidget, QPushButton, QWidget
+from PyQt5.QtWidgets import QBoxLayout, QDialog, QLabel, QLineEdit, QListWidget, QPushButton, QWidget
 from PyQt5.QtCore import Qt
 
 
@@ -32,3 +32,25 @@ class ManageTODOs(QWidget):
 
   def setDeleteCallback(self, callback):
     self.delete.clicked.connect(callback)
+
+
+class NewTODODialog(QDialog):
+
+  def __init__(self):
+    super().__init__()
+    layout = QBoxLayout(QBoxLayout.Direction.TopToBottom)
+    self.instructions = QLabel('Enter a name for your new TODO list:')
+    self.name = QLineEdit()
+    self.ok = QPushButton('OK')
+    self.cancel = QPushButton('Cancel')
+    layout.addWidget(self.instructions, alignment=Qt.AlignCenter)
+    layout.addWidget(self.name, alignment=Qt.AlignCenter)
+    layout.addWidget(self.ok, alignment=Qt.AlignCenter)
+    layout.addWidget(self.cancel, alignment=Qt.AlignCenter)
+    self.setLayout(layout)
+
+  def setOKCallback(self, callback):
+    self.ok.clicked.connect(lambda: callback(self.name.text))
+
+  def setCancelCallback(self, callback):
+    self.cancel.clicked.connect(callback)
