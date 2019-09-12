@@ -7,7 +7,7 @@ class Observable:
     self.observers = observers
 
   def attach(self, observer):
-    self.observers.add(observers)
+    self.observers.add(observer)
 
   def detach(self, observer):
     self.observers.remove(observer)
