@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtWidgets import QApplication, QStackedWidget
 from PyQt5.QtCore import Qt
 from todo import TODOManager, TODO
-from widgets import ManageTODOs, NewTODODialog
+from widgets import ManageTODOs, NewTODODialog, ViewTODO
 import sys
 
 
@@ -17,12 +17,14 @@ def createNewTODODialog(manager):
   dialog.setCancelCallback(dialog.close)
   dialog.exec_()
 
-if __name__ == '__main__':
-  manager = TODOManager()
+def initUI(manager):
   app = QApplication(sys.argv)
-  main = ManageTODOs(manager)
-  def newTODODialogCallback():
-    createNewTODODialog(manager)
-  main.setNewCallback(lambda: createNewTODODialog(manager))
+  manage = ManageTODOs()
+  main = QStackedWidget()
+  main.addWidget(manage)
   main.show()
   sys.exit(app.exec_())
+
+if __name__ == '__main__':
+  manager = TODOManager()
+  initUI(manager)
