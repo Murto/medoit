@@ -23,11 +23,18 @@ class TODO:
 
 class TODOManager:
     
-  def __init__(self, todos=set()):
+  def __init__(self, todos=set(), listeners=set()):
     self.todos = todos
+    self.listeners = listeners
 
   def add(self, todo):
-    self.todos
+    self.todos.add(todo)
 
   def remove(self, todo):
-    todo.remove(todo)
+    self.todos.remove(todo)
+
+  def addListener(self, listener):
+    self.listeners.add(listener)
+
+  def removeListener(self, listener):
+    self.listeners.remove(listener)
