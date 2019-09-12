@@ -3,7 +3,7 @@
 from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5.QtCore import Qt
 from todo import TODOManager, TODO
-from widgets import ManageTODOs, NewTODODialog
+from interface import ManageTODOs, NewTODODialog
 import sys
 
 def createNewTODODialog(manager):
