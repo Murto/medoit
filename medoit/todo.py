@@ -28,8 +28,8 @@ class TODOManager:
   def __init__(self, todos=set()):
     self.todos = todos
 
-  def addTODO(self, todo):
+  def add(self, todo):
     self.todos
 
-  def removeTODO(self, todo):
+  def remove(self, todo):
     todo.remove(todo)
