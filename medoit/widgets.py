@@ -29,13 +29,13 @@ class ManageTODOs(QWidget):
     self.new.clicked.connect(callback)
 
   def setViewCallback(self, callback):
-    self.view.clicked.connect(lambda: callback(self.todos.currentRow))
+    self.view.clicked.connect(lambda: callback(self.todos.currentItem()))
 
   def setRenameCallback(self, callback):
-    self.rename.clicked.connect(lambda: callback(self.todos.currentRow))
+    self.rename.clicked.connect(lambda: callback(self.todos.currentItem()))
 
   def setDeleteCallback(self, callback):
-    self.delete.clicked.connect(lambda: callback(self.todos.currentRow))
+    self.delete.clicked.connect(lambda: callback(self.todos.currentItem()))
 
 
 class NewTODODialog(QDialog):
