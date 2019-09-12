@@ -64,9 +64,7 @@ class ViewTODO(QWidget):
 
   def __init__(self):
     super().__init__()
-    self.manager = manager
-    self.todo = todo
-    self.title = QLabel(self.todo.name)
+    self.title = QLabel('TODO')
     self.items = QListWidget()
     self.add = QPushButton('Add')
     self.remove = QPushButton('Remove')
