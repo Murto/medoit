@@ -15,12 +15,3 @@ class Observable:
   def notify(self):
     for observer in self.observers:
       observer()
-
-
-class Observer:
-
-  def __init__(self, observer):
-    observer.registerObserver(self)
-
-  def notify(self):
-    raise NotImplementedError()
