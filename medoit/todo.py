@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from observe import Observable, Observer
+from observe import Observable
 
 
 class TODOItem:
@@ -12,7 +12,7 @@ class TODOItem:
 class TODO(Observable):
 
   def __init__(self, name, items=list(), observers=set()):
-    super().__init__(observers=observers)
+    super().__init__(observers)
     self.name = name
     self.items = items
     self.notify()
@@ -26,10 +26,10 @@ class TODO(Observable):
     self.notify()
 
 
-class TODOManager:
+class TODOManager(Observable):
     
   def __init__(self, todos=set(), observers=set()):
-    super().__init__(observers=observers)
+    super().__init__(observers)
     self.todos = todos
     self.notify()
 
@@ -40,4 +40,3 @@ class TODOManager:
   def remove(self, todo):
     self.todos.remove(todo)
     self.notify()
-
