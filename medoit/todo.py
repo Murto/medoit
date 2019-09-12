@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from observe import Observable, Observer
+
 
 class TODOItem:
 
@@ -7,34 +9,35 @@ class TODOItem:
     self.description = description
     self.deadline = deadline
 
+class TODO(Observable):
 
-class TODO:
-
-  def __init__(self, name, items=list()):
+  def __init__(self, name, items=list(), observers=set()):
+    super().__init__(observers=observers)
     self.name = name
     self.items = items
+    self.notify()
 
   def add(item):
     self.items.append(item)
+    self.notify()
   
   def remove(index):
     del self.items[index]
+    self.notify()
 
 
 class TODOManager:
     
-  def __init__(self, todos=set(), listeners=set()):
+  def __init__(self, todos=set(), observers=set()):
+    super().__init__(observers=observers)
     self.todos = todos
-    self.listeners = listeners
+    self.notify()
 
   def add(self, todo):
     self.todos.add(todo)
+    self.notify()
 
   def remove(self, todo):
     self.todos.remove(todo)
+    self.notify()
 
-  def addListener(self, listener):
-    self.listeners.add(listener)
-
-  def removeListener(self, listener):
-    self.listeners.remove(listener)
