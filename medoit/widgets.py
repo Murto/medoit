@@ -23,7 +23,7 @@ class ManageTODOs(QWidget):
 
   def update(self, manager):
     self.todos.clear()
-    self.todos.addItems([todo.name for todo in manager.todos])
+    self.todos.addItems([name for name in manager.todos])
 
   def setNewCallback(self, callback):
     self.new.clicked.connect(callback)
