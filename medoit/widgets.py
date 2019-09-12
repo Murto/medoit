@@ -25,24 +25,28 @@ class ManageTODOs(QWidget):
     self.todos.clear()
     self.todos.addItems([name for name in manager.todos])
 
+  def getSelectedItem(self):
+    item = self.todos.currentItem()
+    return item and item.text()
+
   def setNewCallback(self, callback):
     self.new.clicked.connect(callback)
 
   def setViewCallback(self, callback):
-    self.view.clicked.connect(lambda: callback(self.todos.currentItem()))
+    self.view.clicked.connect(lambda: callback(self.getSelectedItem()))
 
   def setRenameCallback(self, callback):
-    self.rename.clicked.connect(lambda: callback(self.todos.currentItem()))
+    self.rename.clicked.connect(lambda: callback(self.getSelectedItem()))
 
   def setDeleteCallback(self, callback):
-    self.delete.clicked.connect(lambda: callback(self.todos.currentItem()))
+    self.delete.clicked.connect(lambda: callback(self.getSelectedItem()))
 
 
 class ViewTODO(QWidget):
 
-  def __init__(self):
+  def __init__(self, title):
     super().__init__()
-    self.title = QLabel('TODO')
+    self.title = QLabel(title)
     self.items = QListWidget()
     self.add = QPushButton('Add')
     self.remove = QPushButton('Remove')
