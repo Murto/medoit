@@ -3,8 +3,9 @@
 from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5.QtCore import Qt
 from todo import TODOManager, TODO
-from interface import ManageTODOs, NewTODODialog
+from widgets import ManageTODOs, NewTODODialog
 import sys
+
 
 def createNewTODODialog(manager):
   dialog = NewTODODialog()
